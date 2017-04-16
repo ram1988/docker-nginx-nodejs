@@ -1,0 +1,23 @@
+postgres:
+  image: postgres:9.4.5
+  environment:
+    POSTGRES_USER: nodejs
+    POSTGRES_PASSWORD: nodejs
+  ports:
+    - '5432'
+
+node-hello:
+  build: .
+  command: node app.js
+  links:
+    - postgres
+  ports:
+    - '3000'
+    
+    
+nginx:
+  build: ./nginx
+  links:
+    - node-hello
+  ports:
+    - '9090:80'
