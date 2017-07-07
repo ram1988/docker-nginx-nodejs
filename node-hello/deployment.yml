@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: first-node-app
+  labels:
+    #Project ID
+    app: dogwood-channel-173007
+spec:
+  #Run two instances of our application
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: dogwood-channel-173007
+    spec:
+      #Container details
+      containers:
+        - name: node-hello
+          image: gcr.io/dogwood-channel-173007/node-app:1.0.0
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+          - containerPort: 3000
